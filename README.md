@@ -1,20 +1,22 @@
-# Rust Timesheet Tracker
+# Rust Project Tracker
 
-A simple command-line tool for loggin and reviewing things that aren't programming sessions. This is mainly intended as a learning project to explore Rust programming.
 
----
+A fast, lightweight, and cross‑platform command‑line tool for logging and reviewing **any kind of project work** — from creative writing to home renovations.  
+Built in Rust for reliability and speed, it’s designed to grow from a simple tracker into a full‑featured personal project management suite.
 
-## Features
+────────────────────────────────────────────
 
-- **Track sessions** with date, project name, description, and duration (in minutes)
-- **Persistent storage** in a local JSON file
-- **View all entries** in a clean list
-- **Summarize total time** spent on a specific project
-- **Cross-platform** - runs anywhere Rust can
+## ✦ Features
 
----
+- Track sessions with **date**, **project name**, **description**, and **duration** (in minutes)
+- Persistent storage in a local JSON file
+- View all entries in a clean, readable list
+- Summarize total time spent on a specific project
+- Runs anywhere Rust can compile
 
-## Installation
+────────────────────────────────────────────
+
+## ⌘ Installation
 
 1. **Clone the repo**
     ```bash
@@ -26,27 +28,15 @@ A simple command-line tool for loggin and reviewing things that aren't programmi
     cargo run
     ```
 
-## Usage
+────────────────────────────────────────────
 
-[Not implemented]
+## ⚙ Usage
 
-## Data Format
+*(CLI interface in progress — interactive commands coming soon)*
 
-Entries are stored in **timesheet.json** in this format:
+────────────────────────────────────────────
 
-```Json
-[
-  {
-    "date": "2025-09-07T14:00:00Z",
-    "project": "Rust Timesheet",
-    "description": "Implemented load_entries",
-    "duration": 90
-  }
-]
-```
-
-
-## 🚀 Roadmap
+## ☰ Roadmap
 
 ### Short‑Term Goals
 - [x] Implement `load_entries()` function
@@ -57,10 +47,10 @@ Entries are stored in **timesheet.json** in this format:
 - [ ] Export to CSV
 
 ### Long‑Term / Stretch Goals
-- [ ] GUI interface
+- [ ] GUI interface (Tauri, egui, or web‑based dashboard)
 - [ ] More file types for export (TOML, YAML, Excel, PDF)
 - [ ] Calendar view for entries (month/week/day navigation)
-- [ ] Email and push notifications (reminders to log time, weekly summaries)
+- [ ] Email and push notifications (reminders, weekly summaries)
 - [ ] Theming (light/dark mode, custom color schemes)
 - [ ] Cloud sync between devices
 - [ ] User authentication for multi‑user tracking
@@ -68,7 +58,25 @@ Entries are stored in **timesheet.json** in this format:
 - [ ] Data visualization (charts/graphs of time spent)
 - [ ] Integration with external APIs (GitHub activity, Jira, etc.)
 
+────────────────────────────────────────────
 
-# License
+## ⎘ Data Format
+
+Entries are stored in **timesheet.json** in this format:
+
+```json
+[
+  {
+    "date": "2025-09-07T14:00:00Z",
+    "project": "Rust Project Tracker",
+    "description": "Implemented load_entries",
+    "duration": 90
+  }
+]
+```
+
+────────────────────────────────────────────
+
+## ⚖ License
 
 [Not implemented]
