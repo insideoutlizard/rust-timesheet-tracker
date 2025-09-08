@@ -40,8 +40,10 @@ Built in Rust for reliability and speed, it’s designed to grow from a simple t
 
 ### Short‑Term Goals
 - [x] Implement `load_entries()` function
-- [ ] Add `save_entries()` function
-- [ ] Implement `add_entry()` with interactive prompts
+- [x] Add `save_entries()` function
+- [x] Implement `add_entry()` ~~with interactive prompts~~
+- [ ] main menu and interactive prompts
+- [ ] implement duration counter properly
 - [ ] Pretty‑print tables for `list_entries()`
 - [ ] Filter entries by date range
 - [ ] Export to CSV
