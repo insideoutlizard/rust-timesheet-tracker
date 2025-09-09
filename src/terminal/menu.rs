@@ -1,4 +1,5 @@
 use crate::entries::{Entry, TimesheetError, load_entries, save_entries};
+use chrono::{DateTime, Local, NaiveDateTime, TimeZone, Utc};
 use std::io::{self, Write};
 
 fn clear_screen() {
@@ -26,12 +27,13 @@ fn view_entries(entries: &Vec<Entry>) {
     println!("\n─── Entries ───");
     for (i, entry) in entries.iter().enumerate() {
         println!(
-            "{}. [{}] {}: {} — {} min",
+            "{}. [{} -> {}] {}: {} — {} min",
             i + 1,
-            entry.date.format("%Y-%m-%d %H:%M"),
+            entry.start_time.format("%Y-%m-%d %H:%M"),
+            entry.end_time.format("%Y-%m-%d %H:%M"),
             entry.project,
             entry.description,
-            entry.duration
+            entry.duration_minutes()
         );
     }
 }
@@ -39,7 +41,8 @@ fn view_entries(entries: &Vec<Entry>) {
 fn add_entry(entries: &mut Vec<Entry>) {
     let mut project = String::new();
     let mut description = String::new();
-    let mut duration = String::new();
+    let mut start_input = String::new();
+    let mut end_input = String::new();
 
     print!("Project: ");
     io::stdout().flush().unwrap();
@@ -49,12 +52,40 @@ fn add_entry(entries: &mut Vec<Entry>) {
     io::stdout().flush().unwrap();
     io::stdin().read_line(&mut description).unwrap();
 
-    print!("Duration (minutes): ");
+    // manual input, leaving blank should get current time
+    print!("Start time: (YYYY-MM-DD HH:MM): ");
     io::stdout().flush().unwrap();
-    io::stdin().read_line(&mut duration).unwrap();
+    io::stdin().read_line(&mut start_input).unwrap();
 
-    let duration: i64 = duration.trim().parse().unwrap_or(0);
-    let entry = Entry::new(project.trim(), description.trim(), duration);
+    print!("Use current time as start? (y/nm): ");
+    io::stdout().flush().unwrap();
+    let mut use_now = String::new();
+    io::stdin().read_line(&mut use_now).unwrap();
+
+    let start_time = if use_now.trim().eq_ignore_ascii_case("y") {
+        Utc::now()
+    } else {
+        print!("Start time: (YYYY-MM-DD HH:MM): ");
+        io::stdout().flush().unwrap();
+        io::stdin().read_line(&mut start_input).unwrap();
+        let naive = NaiveDateTime::parse_from_str(start_input.trim(), "%Y-%m-%d %H:%M").unwrap();
+        Local
+            .from_local_datetime(&naive)
+            .unwrap()
+            .with_timezone(&Utc)
+    };
+
+    // manual input, leaving blank should add the entry to a list of unfinished entries
+    print!("End time: (YYYY-MM-DD HH:MM): ");
+    io::stdout().flush().unwrap();
+    io::stdin().read_line(&mut end_input).unwrap();
+    let naive = NaiveDateTime::parse_from_str(end_input.trim(), "%Y-%m-%d %H:%M").unwrap();
+    let end_time = Local
+        .from_local_datetime(&naive)
+        .unwrap()
+        .with_timezone(&Utc);
+
+    let entry = Entry::new(project.trim(), description.trim(), start_time, end_time);
     entries.push(entry);
 
     println!("\nEntry added.");

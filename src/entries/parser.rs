@@ -1,21 +1,29 @@
 use chrono::{DateTime, Utc};
-use serde::{Deserialize, Serialize};
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Debug)]
 pub struct Entry {
-    pub date: DateTime<Utc>,
+    pub start_time: DateTime<Utc>,
+    pub end_time: DateTime<Utc>,
     pub project: String,
     pub description: String,
-    pub duration: i64, // minutes
 }
 
 impl Entry {
-    pub fn new(project: &str, description: &str, duration: i64) -> Self {
+    pub fn new(
+        project: &str,
+        description: &str,
+        start_time: DateTime<Utc>,
+        end_time: DateTime<Utc>,
+    ) -> Self {
         Entry {
-            date: Utc::now(),
+            start_time,
+            end_time,
             project: project.to_string(),
             description: description.to_string(),
-            duration,
         }
+    }
+
+    pub fn duration_minutes(&self) -> i64 {
+        (self.end_time - self.start_time).num_minutes()
     }
 }
