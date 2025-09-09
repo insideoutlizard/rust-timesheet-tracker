@@ -1,7 +1,7 @@
 # Rust Project Tracker
 
 
-A fast, lightweight, and cross‑platform command‑line tool for logging and reviewing **any kind of project work** — from creative writing to home renovations.  
+A fast, lightweight, and cross‑platform command‑line tool for logging and reviewing **any kind of project work** — from creative writing to home renovations.
 Built in Rust for reliability and speed, it’s designed to grow from a simple tracker into a full‑featured personal project management suite.
 
 ────────────────────────────────────────────
@@ -42,11 +42,12 @@ Built in Rust for reliability and speed, it’s designed to grow from a simple t
 - [x] Implement `load_entries()` function
 - [x] Add `save_entries()` function
 - [x] Implement `add_entry()` ~~with interactive prompts~~
-- [ ] main menu and interactive prompts
-- [ ] implement duration counter properly
-- [ ] Pretty‑print tables for `list_entries()`
+- [x] main menu and interactive prompts
+- [ ] ~~implement duration counter properly~~ start/end timestamps is easier.
+- [x] Pretty‑print tables for `list_entries()`
 - [ ] Filter entries by date range
 - [ ] Export to CSV
+- [ ] Move Json serialization to SQLite database
 
 ### Long‑Term / Stretch Goals
 - [ ] GUI interface (Tauri, egui, or web‑based dashboard)
