@@ -1,7 +1,8 @@
-mod entries;
-mod terminal;
+use crate::terminal::run_terminal;
 
-use terminal::run_terminal;
+mod entries;
+mod storage;
+mod terminal;
 
 fn main() {
     if let Err(e) = run_terminal("timesheet.json") {

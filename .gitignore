@@ -6,6 +6,7 @@ Cargo.lock
 # private planning docs
 SYMBOLS.md
 ROADMAP.md
+**/src/entries/loader.rs
 
 # that should ignore the 2 files above
 #
