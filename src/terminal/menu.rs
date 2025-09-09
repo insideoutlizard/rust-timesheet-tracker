@@ -26,10 +26,11 @@ fn view_entries(entries: &Vec<Entry>) {
     println!("\n─── Entries ───");
     for (i, entry) in entries.iter().enumerate() {
         println!(
-            "{}. [{}] {} — {} min",
+            "{}. [{}] {}: {} — {} min",
             i + 1,
             entry.date.format("%Y-%m-%d %H:%M"),
             entry.project,
+            entry.description,
             entry.duration
         );
     }
