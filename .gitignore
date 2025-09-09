@@ -2,3 +2,15 @@ echo "target/
 *.rs.bk
 Cargo.lock
 " > .gitignore
+
+# private planning docs
+SYMBOLS.md
+ROADMAP.md
+
+# that should ignore the 2 files above
+#
+# /*.md
+# !/README.md
+#
+# remove those private planning docs, and just add the commented out stuff
+# on lines 12 and 13 to ignore all .md files except the README for sanitys sake later if needed

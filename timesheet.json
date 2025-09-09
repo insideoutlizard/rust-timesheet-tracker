@@ -4,6 +4,29 @@
     "project": "Rust Timesheet",
     "description": "Implemented load_entries",
     "duration": 90
+  },
+  {
+    "date": "2025-09-08T00:26:09.208829510Z",
+    "project": "General Project",
+    "description": "Initail setup",
+    "duration": 23
+  },
+  {
+    "date": "2025-09-09T02:26:32.964407284Z",
+    "project": "General Project",
+    "description": "main.rs cleanup",
+    "duration": 38
+  },
+  {
+    "date": "2025-09-09T03:23:14.143579008Z",
+    "project": "Racism",
+    "description": "black cleanup",
+    "duration": 0
+  },
+  {
+    "date": "2025-09-09T03:33:41.091163804Z",
+    "project": "Daily activities",
+    "description": "shit down everyones throat.",
+    "duration": 9999999999
   }
 ]
-
