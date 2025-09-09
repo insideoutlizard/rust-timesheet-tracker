@@ -1,5 +1,6 @@
-use crate::entries::{Entry, TimesheetError, load_entries, save_entries};
-use chrono::{DateTime, Local, NaiveDateTime, TimeZone, Utc};
+use crate::entries::Entry;
+use crate::storage::sqlite::{get_all_entries, init_db, insert_entry};
+use chrono::{Local, NaiveDateTime, TimeZone, Utc};
 use std::io::{self, Write};
 
 fn clear_screen() {
@@ -91,8 +92,9 @@ fn add_entry(entries: &mut Vec<Entry>) {
     println!("\nEntry added.");
 }
 
-pub fn run_terminal(file_path: &str) -> Result<(), TimesheetError> {
-    let mut entries = load_entries(file_path)?;
+pub fn run_terminal(db_path: &str) -> rusqlite::Result<()> {
+    let conn = init_db(db_path)?;
+    let mut entries = get_all_entries(&conn)?;
 
     loop {
         clear_screen();
@@ -110,11 +112,12 @@ pub fn run_terminal(file_path: &str) -> Result<(), TimesheetError> {
             "2" => {
                 clear_screen();
                 add_entry(&mut entries);
+                let new_entry = entries.last().unwrap();
+                insert_entry(&conn, new_entry)?;
                 pause();
             }
             "3" => {
-                save_entries(file_path, &entries)?;
-                println!("Saved. Exiting...");
+                println!("Exiting...");
                 break;
             }
             _ => {
