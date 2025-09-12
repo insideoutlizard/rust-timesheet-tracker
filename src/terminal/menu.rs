@@ -93,7 +93,7 @@ fn add_entry(entries: &mut Vec<Entry>) {
 }
 
 pub fn run_terminal(db_path: &str) -> rusqlite::Result<()> {
-    let conn = init_db(db_path)?;
+    let conn = init_db(&db_path)?;
     let mut entries = get_all_entries(&conn)?;
 
     loop {

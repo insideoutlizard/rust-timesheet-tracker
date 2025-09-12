@@ -1,23 +1,41 @@
 use crate::entries::Entry;
 use chrono::{DateTime, Utc};
 use rusqlite::{Connection, Result, params};
+use std::path::Path;
 
-pub fn init_db(path: &str) -> Result<Connection> {
-    let conn = Connection::open(path)?;
+fn db_exists(path: &str) -> bool {
+    Path::new(path).exists()
+}
+
+fn create_db(conn: &Connection) -> Result<()> {
     conn.execute(
         "CREATE TABLE IF NOT EXISTS entries (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            start_time TEXT NOT NULL,
-            end_time TEXT NOT NULL,
-            project TEXT NOT NULL,
-            description TEXT,
-            duration INTEGER GENERATED ALWAYS AS (
-                CAST((julianday(end_time) - julianday(start_time)) * 1440 AS INTEGER)
-            ) STORED
-        )",
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                start_time TEXT NOT NULL,
+                end_time TEXT NOT NULL,
+                project TEXT NOT NULL,
+                description TEXT,
+                duration INTEGER GENERATED ALWAYS AS (
+                    CAST((julianday(end_time) - julianday(start_time)) * 1440 AS INTEGER)
+                ) STORED
+            )",
         [],
     )?;
-    Ok(conn)
+
+    println!("Database schema created.");
+    Ok(())
+}
+
+pub fn init_db(path: &str) -> Result<Connection> {
+    if !db_exists(path) {
+        println!("Database not found. Creating...");
+        let conn = Connection::open(path)?;
+        create_db(&conn)?;
+        Ok(conn)
+    } else {
+        println!("Database found.");
+        Connection::open(path)
+    }
 }
 
 pub fn insert_entry(conn: &Connection, entry: &Entry) -> Result<()> {
