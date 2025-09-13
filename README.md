@@ -1,6 +1,5 @@
 # Rust Project Tracker
 
-
 A fast, lightweight, and cross‑platform command‑line tool for logging and reviewing **any kind of project work** — from creative writing to home renovations.
 Built in Rust for reliability and speed, it’s designed to grow from a simple tracker into a full‑featured personal project management suite.
 
@@ -37,6 +36,10 @@ Built in Rust for reliability and speed, it’s designed to grow from a simple t
 ────────────────────────────────────────────
 
 ## ☰ Roadmap
+
+### Bugs
+- [ ] still asks, and uses current date after entering custom date
+- [ ] end_time crashes and program stops due to invalid formatting
 
 ### Short‑Term Goals
 - [x] Implement `load_entries()` function
